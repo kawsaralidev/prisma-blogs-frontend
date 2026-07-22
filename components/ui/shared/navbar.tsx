@@ -8,12 +8,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import { logout } from "@/service/logout";
 import { LogOut, Settings, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { logout } from "@/service/logOut";
 
 // Navigation items configuration
 const navItems = [
@@ -61,8 +61,12 @@ export function Navbar({ user }: NavbarProps) {
   const router = useRouter();
   const handleUserMenuAction = async (action: string) => {
     if (action === "logout") {
-      await toast.success("User Logged Out Successfully!");
+      await logout(); // ✅ Server Action call
+
+      toast.success("User Logged Out Successfully!");
+
       router.push("/login");
+      router.refresh();
     }
   };
 

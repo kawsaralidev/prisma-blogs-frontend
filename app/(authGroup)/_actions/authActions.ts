@@ -14,6 +14,17 @@ type LoginState = {
   };
 };
 
+type RegisterState = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data?: {
+    id: string;
+    name: string;
+    email: string;
+  };
+};
+
 export const loginAction = async (
   prevState: LoginState,
   formData: FormData,
@@ -60,6 +71,30 @@ export const loginAction = async (
       redirect("/author-dashboard");
     }
   }
+
+  return result;
+};
+
+export const registerAction = async (
+  prevState: RegisterState,
+  formData: FormData,
+) => {
+  const payload = {
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+    profilePhoto: formData.get("profilePhoto"),
+  };
+
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/users/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const result = await res.json();
 
   return result;
 };
