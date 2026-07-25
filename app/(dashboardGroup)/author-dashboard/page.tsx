@@ -1,9 +1,16 @@
-import React from "react";
+import { MyPostList } from "../_components/MyPostList";
 
 const AuthorDashboardPage = () => {
   return (
-    <div>
-      <h2>this is author dashboard page </h2>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold">My Posts</h1>
+        <p className="text-muted-foreground">
+          Manage all of your posts from here.
+        </p>
+      </div>
+
+      <MyPostList />
     </div>
   );
 };

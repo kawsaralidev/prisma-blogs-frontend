@@ -20,6 +20,8 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
+  { label: "News", href: "/news" },
+  { label: "Premium", href: "/premium" },
   { label: "Contact", href: "/contact" },
 ];
 
