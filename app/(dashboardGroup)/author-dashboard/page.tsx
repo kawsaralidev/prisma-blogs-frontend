@@ -1,5 +1,4 @@
 import { MyPostList } from "../_components/MyPostList";
-import { Button } from "@/components/ui/button";
 import { PostFormDialog } from "../_components/PostFormDialog";
 
 const AuthorDashboardPage = () => {

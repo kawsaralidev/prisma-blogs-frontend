@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { PostFormDialog } from "../../_components/PostFormDialog";
 import { MyPostSkeleton } from "../../_components/MyPostSkeleton";
+import { MyPostList } from "../../_components/MyPostList";
 
 const UserMyPostsPage = () => {
   return (
@@ -18,7 +19,7 @@ const UserMyPostsPage = () => {
       </div>
 
       <Suspense fallback={<MyPostSkeleton />}>
-        <MyPostsList />
+        <MyPostList></MyPostList>
       </Suspense>
     </div>
   );

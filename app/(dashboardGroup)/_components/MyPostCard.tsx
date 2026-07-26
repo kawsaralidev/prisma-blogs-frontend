@@ -1,11 +1,8 @@
 import Image from "next/image";
-import { Eye, Trash2 } from "lucide-react";
-
+import { Eye } from "lucide-react";
+import { DeletePostDialog } from "./DeletePostDialog";
 import { IPost } from "@/lib/types";
-
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-
 import { PostFormDialog } from "./PostFormDialog";
 
 type MyPostCardProps = {
@@ -62,32 +59,12 @@ export const MyPostCard = ({ post }: MyPostCardProps) => {
             )}
           </div>
 
-          {/* ===========================
-              Action Buttons
-          ============================ */}
-
           <div className="mt-6 flex gap-3">
-            {/* 
-              mode="edit" পাঠানোর কারণে
-              একই Dialog এবার Edit Mode-এ খুলবে।
-
-              post prop পাঠানোর কারণে
-              Form-এর সব Input এ আগের Data
-              Automatic দেখাবে।
-            */}
+            {/* Edit Post */}
             <PostFormDialog mode="edit" post={post} />
 
-            {/* 
-              Delete Button
-
-              আপাতত শুধু UI বানানো হয়েছে।
-              পরবর্তী Step-এ Delete API
-              Connect করা হবে।
-            */}
-            <Button variant="destructive">
-              <Trash2 className="mr-2 h-4 w-4" />
-              Delete
-            </Button>
+            {/* Delete Post */}
+            <DeletePostDialog postId={post.id} />
           </div>
         </div>
       </div>
