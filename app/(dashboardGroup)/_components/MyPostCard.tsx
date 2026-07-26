@@ -1,16 +1,22 @@
-import { IPost } from "@/lib/types";
 import Image from "next/image";
+import { Eye, Trash2 } from "lucide-react";
+
+import { IPost } from "@/lib/types";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+
+import { PostFormDialog } from "./PostFormDialog";
 
 type MyPostCardProps = {
   post: IPost;
 };
 
 export const MyPostCard = ({ post }: MyPostCardProps) => {
-  console.log(post.thumbnail);
   return (
-    <div className="rounded-lg border p-5 shadow-sm">
-      <div className="flex gap-5">
-        <div className="relative h-36 w-52 overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
+      <div className="flex flex-col md:flex-row">
+        <div className="relative h-56 w-full md:h-auto md:w-64">
           {post.thumbnail ? (
             <Image
               src={post.thumbnail}
@@ -19,29 +25,69 @@ export const MyPostCard = ({ post }: MyPostCardProps) => {
               className="object-cover"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gray-100 text-sm text-gray-500">
+            <div className="flex h-full items-center justify-center bg-gray-100 text-gray-500">
               No Image
             </div>
           )}
         </div>
 
-        <div className="flex flex-1 flex-col justify-between">
+        <div className="flex flex-1 flex-col justify-between p-5">
           <div>
-            <h2 className="text-2xl font-semibold">{post.title}</h2>
-
-            <p className="mt-2 line-clamp-2 text-muted-foreground">
+            <h2 className="text-2xl font-bold">{post.title}</h2>
+            <p className="mt-3 line-clamp-3 text-muted-foreground">
               {post.content}
             </p>
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
-            <span>👁 {post.views}</span>
+          {/* Post Information Badges */}
 
-            <span>{post.status}</span>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {/* Total Views */}
+            <Badge variant="secondary">
+              <Eye className="mr-1 h-4 w-4" />
+              {post.views}
+            </Badge>
 
-            {post.isFeatured && <span>⭐ Featured</span>}
+            {/* Post Status */}
+            <Badge>{post.status}</Badge>
 
-            {post.isPremium && <span>💎 Premium</span>}
+            {/* Featured Badge */}
+            {post.isFeatured && (
+              <Badge className="bg-yellow-500">⭐ Featured</Badge>
+            )}
+
+            {/* Premium Badge */}
+            {post.isPremium && (
+              <Badge className="bg-purple-600">💎 Premium</Badge>
+            )}
+          </div>
+
+          {/* ===========================
+              Action Buttons
+          ============================ */}
+
+          <div className="mt-6 flex gap-3">
+            {/* 
+              mode="edit" পাঠানোর কারণে
+              একই Dialog এবার Edit Mode-এ খুলবে।
+
+              post prop পাঠানোর কারণে
+              Form-এর সব Input এ আগের Data
+              Automatic দেখাবে।
+            */}
+            <PostFormDialog mode="edit" post={post} />
+
+            {/* 
+              Delete Button
+
+              আপাতত শুধু UI বানানো হয়েছে।
+              পরবর্তী Step-এ Delete API
+              Connect করা হবে।
+            */}
+            <Button variant="destructive">
+              <Trash2 className="mr-2 h-4 w-4" />
+              Delete
+            </Button>
           </div>
         </div>
       </div>

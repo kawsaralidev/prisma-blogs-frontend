@@ -1,4 +1,6 @@
 import { MyPostList } from "../_components/MyPostList";
+import { Button } from "@/components/ui/button";
+import { PostFormDialog } from "../_components/PostFormDialog";
 
 const AuthorDashboardPage = () => {
   return (
@@ -8,6 +10,7 @@ const AuthorDashboardPage = () => {
         <p className="text-muted-foreground">
           Manage all of your posts from here.
         </p>
+        <PostFormDialog mode="create" />
       </div>
 
       <MyPostList />
