@@ -13,5 +13,7 @@ export const getPostById = async (id: string) => {
     throw new Error(result.message || "Failed to fetch post.");
   }
 
-  return result.data;
+  const post: IPost = result.data;
+
+  return post;
 };
