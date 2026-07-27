@@ -1,6 +1,7 @@
 import { IPost } from "@/lib/types";
-import { getPremiumNews } from "../../_actions/GetPremiumNews";
+// import { getPremiumNews } from "../../_actions/GetPremiumNews";
 import { NewsCard } from "./NewsCard";
+import { getPremiumNews } from "../../_actions/getPremiumNews";
 
 export async function PremiumNewsList() {
   const result = await getPremiumNews();

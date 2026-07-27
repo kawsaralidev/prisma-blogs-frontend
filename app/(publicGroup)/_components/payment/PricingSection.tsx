@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { CheckIcon } from "lucide-react";
-import { SubscribeButton } from "./SubscribeButton";
+// import SubscribeButton from "./SubscribeButton";
 
 export async function PricingSection() {
   const statusResult = {
@@ -57,7 +57,7 @@ export async function PricingSection() {
           </li>
         </ul>
 
-        {!isActive && <SubscribeButton />}
+        {/* {!isActive && <SubscribeButton />} */}
       </CardContent>
     </Card>
   );

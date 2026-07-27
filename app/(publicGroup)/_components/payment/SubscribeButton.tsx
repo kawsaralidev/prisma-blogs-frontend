@@ -4,9 +4,9 @@
 // import { toast } from "sonner";
 
 // import { Button } from "@/components/ui/button";
-// import { subscribeAction } from "@/actions/payment";
+// // import { subscribeAction } from "@/actions/payment";
 
-// export function SubscribeButton() {
+// export default function SubscribeButton() {
 //   const [state, action, pending] = useActionState(subscribeAction, null);
 
 //   useEffect(() => {
