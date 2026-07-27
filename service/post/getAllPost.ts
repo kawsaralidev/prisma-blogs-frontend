@@ -1,19 +1,23 @@
 /* Get all public posts */
 
-import { IPost } from "@/lib/types";
+import { IPostResponse } from "@/lib/types";
 
 interface GetPostsParams {
   searchTerm?: string;
+  page?: string;
 }
 
 export const getAllPosts = async ({
   searchTerm = "",
-}: GetPostsParams): Promise<IPost[]> => {
+  page = "1",
+}: GetPostsParams): Promise<IPostResponse> => {
   const params = new URLSearchParams();
 
   if (searchTerm) {
-    params.set("searchTerm", searchTerm);
+    params.append("searchTerm", searchTerm);
   }
+
+  params.append("page", page);
 
   const res = await fetch(
     `${process.env.BACKEND_API_URL}/api/post?${params.toString()}`,
@@ -28,7 +32,5 @@ export const getAllPosts = async ({
     throw new Error("Failed to fetch posts.");
   }
 
-  const result = await res.json();
-
-  return result.data;
+  return res.json();
 };

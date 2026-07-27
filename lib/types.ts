@@ -39,3 +39,15 @@ export type IPost = {
   createdAt: string;
   updatedAt: string;
 };
+
+export interface IPostMeta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+export interface IPostResponse {
+  data: IPost[];
+  meta: IPostMeta;
+}

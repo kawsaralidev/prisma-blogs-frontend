@@ -3,6 +3,8 @@
 import { getAllPosts } from "@/service/post/getAllPost";
 import PostGrid from "./_components/PostGrid";
 import SearchBar from "./_components/SearchBar";
+import Pagination from "./_components/Pagination";
+// import Filter from "./_components/Filter";
 
 interface Props {
   searchParams: Promise<{
@@ -12,10 +14,11 @@ interface Props {
 }
 
 const BlogsPage = async ({ searchParams }: Props) => {
-  const { searchTerm = "" } = await searchParams;
+  const { searchTerm = "", page = "1" } = await searchParams;
 
-  const posts = await getAllPosts({
+  const { data: posts, meta } = await getAllPosts({
     searchTerm,
+    page,
   });
   return (
     <section className="container mx-auto py-10">
@@ -28,8 +31,10 @@ const BlogsPage = async ({ searchParams }: Props) => {
       </div>
 
       <SearchBar />
+      {/* <Filter /> */}
 
       <PostGrid posts={posts} />
+      <Pagination currentPage={meta.page} totalPages={meta.totalPages} />
     </section>
   );
 };
