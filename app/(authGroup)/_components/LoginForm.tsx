@@ -5,8 +5,14 @@ import { Button } from "@/components/ui/button";
 import React, { useActionState, useEffect } from "react";
 import { loginAction } from "../_actions/authActions";
 import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
 const LoginForm = () => {
-  const [state, action, pending] = useActionState(loginAction, false);
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") ?? "";
+  const [state, action, pending] = useActionState(
+    loginAction.bind(null, redirectTo),
+    false,
+  );
 
   useEffect(() => {
     if (!state) return;
